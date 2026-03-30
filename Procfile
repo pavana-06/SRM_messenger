@@ -1,1 +1,1 @@
-web: gunicorn app:app --workers 1 --worker-class eventlet --bind
+web: gunicorn -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker app:app
