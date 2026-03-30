@@ -5,133 +5,163 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>University Chat - Login</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg1: #0e1025;
+            --bg2: #2a1661;
+            --accentA: #00e1ff;
+            --accentB: #9f56ff;
+            --text: #f0f4ff;
+            --muted: #bbcaf8;
         }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            display: grid;
+            place-items: center;
+            padding: 22px;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 10% 10%, rgba(0, 225, 255, 0.35), transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(159, 86, 255, 0.4), transparent 30%),
+                linear-gradient(130deg, var(--bg1), var(--bg2));
         }
-
         .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 40px;
-            max-width: 400px;
             width: 100%;
+            max-width: 460px;
+            border-radius: 22px;
+            padding: 32px 28px;
+            background: rgba(17, 21, 50, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.48), inset 0 0 80px rgba(0, 225, 255, 0.05);
+            backdrop-filter: blur(12px);
         }
-
         h1 {
-            color: #667eea;
             text-align: center;
-            margin-bottom: 10px;
-            font-size: 32px;
+            margin-bottom: 8px;
+            color: #fff;
+            font-size: 40px;
+            line-height: 1;
         }
-
         .subtitle {
             text-align: center;
-            color: #666;
-            margin-bottom: 30px;
+            color: var(--muted);
+            margin-bottom: 24px;
             font-size: 14px;
         }
-
-        .form-group {
-            margin-bottom: 20px;
+        .alert {
+            margin-bottom: 14px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            background: rgba(255, 75, 120, 0.16);
+            border: 1px solid rgba(255, 75, 120, 0.45);
         }
-
+        .form-group { margin-bottom: 16px; }
         label {
             display: block;
             margin-bottom: 8px;
-            color: #333;
-            font-weight: 500;
+            color: #dce6ff;
+            font-weight: 600;
             font-size: 14px;
         }
-
         input {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            background: rgba(7, 10, 27, 0.55);
+            color: #fff;
             font-size: 16px;
-            transition: all 0.3s;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
-
         input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: var(--accentA);
+            box-shadow: 0 0 0 3px rgba(0, 225, 255, 0.22);
         }
-
+        .btn-row { display: flex; gap: 10px; margin-top: 6px; }
+        .btn-row button { width: 100%; }
         button {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
+            padding: 12px 14px;
+            color: #fff;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.15s ease;
+            background: linear-gradient(135deg, var(--accentA), var(--accentB));
         }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
+        button:hover { transform: translateY(-1px); }
         .info {
-            margin-top: 20px;
-            padding: 15px;
-            background: #f5f5f5;
-            border-radius: 10px;
+            margin-top: 18px;
+            padding: 12px 14px;
+            border-radius: 12px;
             font-size: 13px;
-            color: #666;
+            color: var(--muted);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.14);
         }
-
-        .info strong {
-            color: #333;
+        .info strong { color: #fff; }
+        .hint {
+            text-align: center;
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 12px;
         }
+        .hint a { color: #e9fbff; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🎓 University Chat</h1>
-        <p class="subtitle">Connect with your classmates in real-time</p>
+        <h1>⚡</h1>
+        <h2 style="text-align:center;margin-bottom:8px;">University Chat</h2>
+        <p class="subtitle">Login or create an account with email</p>
+        {% if request.args.get('error') == 'otp_send_failed' %}
+        <div class="alert">
+            <strong>OTP email failed.</strong><br>
+            SMTP is not configured yet. Please set SMTP environment variables.
+        </div>
+        {% endif %}
 
-        <form action="/chat" method="GET">
+        <form method="POST">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter your name" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="you@srmap.edu.in" required autocomplete="email">
             </div>
 
             <div class="form-group">
-                <label for="room">Room Name</label>
-                <input type="text" id="room" name="room" placeholder="e.g., CS101, Library, Study Group" required>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Minimum 6 characters" required minlength="6" autocomplete="current-password">
             </div>
 
-            <button type="submit">Login</button>
+            <div class="btn-row">
+                <button type="submit" formaction="/login">Login</button>
+                <button type="submit" formaction="/signup">Sign up</button>
+            </div>
         </form>
 
         <div class="info">
             <strong>📝 Quick Tips:</strong><br>
-            • Choose a unique username<br>
-            • Enter a room name to chat with others in that room<br>
-            • All messages are real-time!
+            • Only college email IDs are allowed (`@srmap.edu.in`)<br>
+            • Sign up sends OTP to your email inbox<br>
+            • After login, you’ll choose your username and room
         </div>
+        <div class="hint">Already logged in? Go to <a href="/join">Join</a> or <a href="/logout">Logout</a></div>
     </div>
 </body>
+<script>
+    const emailInput = document.getElementById('email');
+    const allowedDomain = '@srmap.edu.in';
+
+    emailInput.addEventListener('input', function () {
+        const value = emailInput.value.trim().toLowerCase();
+        if (!value || value.endsWith(allowedDomain)) {
+            emailInput.setCustomValidity('');
+            return;
+        }
+        emailInput.setCustomValidity('Use your college email id ending with @srmap.edu.in');
+    });
+</script>
 </html>

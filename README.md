@@ -34,6 +34,35 @@ The application will be available at: `http://localhost:5000`
 
 **Note**: If you encounter PATH issues with Flask, use the run.sh script which properly sets up the environment.
 
+## Production Deployment (WebSocket-safe)
+
+Use a platform that supports long-lived WebSocket connections (Render, Railway, Fly.io, VM).  
+This project includes:
+
+- `Procfile` for `gunicorn + eventlet`
+- `render.yaml` for one-click Render setup
+
+### Required Environment Variables
+
+- `SECRET_KEY`
+- `SMTP_HOST`
+- `SMTP_PORT` (usually `587`)
+- `SMTP_USER`
+- `SMTP_PASSWORD`
+- `SMTP_FROM`
+- `SMTP_USE_TLS` (`true` or `false`)
+
+### Start Command (production)
+
+```bash
+gunicorn --worker-class eventlet --workers 1 --bind 0.0.0.0:$PORT app:app
+```
+
+### Why not Vercel for this backend?
+
+Vercel serverless functions are not a good fit for persistent Flask-SocketIO WebSocket sessions.  
+For reliable real-time chat, deploy this backend on a WebSocket-friendly host.
+
 ## How to Use
 
 1. Open `http://localhost:5000` in your browser
