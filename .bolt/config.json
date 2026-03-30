@@ -1,0 +1,8 @@
+{
+  "projectType": "python",
+  "runtime": "python3",
+  "startCommand": "python3 app.py",
+  "buildCommand": "",
+  "installCommand": "pip install -r requirements.txt",
+  "port": 5000
+}
