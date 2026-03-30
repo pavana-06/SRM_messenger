@@ -6,7 +6,11 @@ from datetime import datetime
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'chat-secret'
 
-socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
+socketio = SocketIO(
+    app,
+    cors_allowed_origins="*",
+    async_mode="threading"
+)
 
 # In-memory storage
 users = {}   # {username: {'sid': sid, 'room': room}}
