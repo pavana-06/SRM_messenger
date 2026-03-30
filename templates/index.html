@@ -7,21 +7,27 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #0e1025, #2a1661);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+         background: linear-gradient(270deg, #0e1025, #2a1661, #0e1025);
+         background-size: 600% 600%;
+         animation: gradientMove 10s ease infinite;
+        }
+
+        @keyframes gradientMove {
+          0% {background-position: 0% 50%;}
+          50% {background-position: 100% 50%;}
+          100% {background-position: 0% 50%;}
         }
 
         .container {
-            background: rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 15px;
+          background: rgba(255,255,255,0.08);
+          backdrop-filter: blur(20px);
+          border-radius: 20px;
+          border: 1px solid rgba(255,255,255,0.2);
+         box-shadow:
+         0 0 20px rgba(0, 225, 255, 0.3),
+         0 0 40px rgba(159, 86, 255, 0.2);
+            padding: 40px;
             width: 300px;
-            text-align: center;
         }
 
         input {
@@ -41,6 +47,32 @@
             color: white;
             font-weight: bold;
             cursor: pointer;
+        }
+
+        .message {
+         padding: 10px 14px;
+         border-radius: 14px;
+         margin: 6px 0;
+         max-width: 70%;
+        
+        }
+
+        .my-message {
+         background: linear-gradient(135deg, #00e1ff, #9f56ff);
+         margin-left: auto;
+        }
+
+        .other-message {
+         background: rgba(255,255,255,0.1);
+        }
+
+        .message {
+         animation: pop 0.3s ease;
+        }
+
+        @keyframes pop {
+         from { transform: scale(0.8); opacity: 0; }
+         to { transform: scale(1); opacity: 1; }
         }
 
         h2 {
