@@ -22,7 +22,6 @@ def index():
     return render_template('index.html')
 
 
-# ✅ Only username + room
 @app.route('/join', methods=['POST'])
 def join_page():
     username = (request.form.get('username') or '').strip()
